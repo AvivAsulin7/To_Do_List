@@ -8,3 +8,12 @@ export const getTodos = async (setTodolist) => {
     console.log(error);
   }
 };
+
+export const todoCreate = async (todo) => {
+  try {
+    const { data } = await api.createTodo(todo);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};

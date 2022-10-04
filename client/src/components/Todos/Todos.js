@@ -2,10 +2,16 @@ import React, { useState, useContext } from "react";
 import { Box, Typography, Input, Button } from "@mui/material";
 import { BoxList, CustomButton } from "../StyledComponents/Styled";
 import TodoContext from "../../contexts/TodoContext";
+import { todoCreate } from "../../actions/todo";
+import Todo from "../Todo/Todo";
 
 const Todos = () => {
-  const { todolist, setTodolist } = useContext(TodoContext);
-  // console.log(todolist);
+  const { todolist, setTodolist, todo, setTodo } = useContext(TodoContext);
+
+  const handleSumbit = () => {
+    todoCreate(todo);
+    setTodolist([...todolist, todo]);
+  };
   return (
     <BoxList>
       <Typography
@@ -22,6 +28,7 @@ const Todos = () => {
         To To List
       </Typography>
       <Input
+        onChange={(e) => setTodo({ todo: e.target.value, priority: "none" })}
         disableUnderline
         sx={{
           boxSizing: "border-box",
@@ -35,8 +42,19 @@ const Todos = () => {
           fontFamily: "Architects Daughter",
         }}
       ></Input>
-      <CustomButton>Add</CustomButton>
-      <ul></ul>
+      <CustomButton
+        type="sumbit"
+        onClick={() => {
+          handleSumbit();
+        }}
+      >
+        Add
+      </CustomButton>
+      <ul>
+        {todolist.map((item, index) => {
+          return <Todo item={item} key={index} />;
+        })}
+      </ul>
     </BoxList>
   );
 };
