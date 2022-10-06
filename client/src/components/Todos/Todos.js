@@ -1,16 +1,29 @@
-import React, { useState, useContext } from "react";
-import { Box, Typography, Input, Button } from "@mui/material";
+import React, { useState, useContext, useEffect } from "react";
+import { Box, Typography, Input, Button, TextField } from "@mui/material";
 import { BoxList, CustomButton } from "../StyledComponents/Styled";
 import TodoContext from "../../contexts/TodoContext";
-import { todoCreate } from "../../actions/todo";
+import { todoCreate, todoUpdate } from "../../actions/todo";
 import Todo from "../Todo/Todo";
 
 const Todos = () => {
-  const { todolist, setTodolist, todo, setTodo } = useContext(TodoContext);
+  const { todolist, currentId, setCurrentId } = useContext(TodoContext);
+  const [item, setItem] = useState({ todo: "", priority: "none" });
+  const [itemUpdated, setItemUpdated] = useState({});
+
+  useEffect(() => {
+    setItem(itemUpdated);
+  }, [itemUpdated]);
 
   const handleSumbit = () => {
-    todoCreate(todo);
-    setTodolist([...todolist, todo]);
+    if (currentId == null) todoCreate(item);
+    else {
+      setItemUpdated(
+        currentId ? todolist.map((item) => item._id === currentId) : null
+      );
+      todoUpdate(currentId, item);
+    }
+    setCurrentId(null);
+    setItem({ todo: "", priority: "" });
   };
   return (
     <BoxList>
@@ -27,8 +40,9 @@ const Todos = () => {
       >
         To To List
       </Typography>
+      {/* <form autoComplete="off" noValidate onSubmit={handleSumbit}> */}
       <Input
-        onChange={(e) => setTodo({ todo: e.target.value, priority: "none" })}
+        onChange={(e) => setItem({ todo: e.target.value, priority: "none" })}
         disableUnderline
         sx={{
           boxSizing: "border-box",
@@ -50,6 +64,7 @@ const Todos = () => {
       >
         Add
       </CustomButton>
+      {/* </form> */}
       <ul>
         {todolist.map((item, index) => {
           return <Todo item={item} key={index} />;

@@ -12,7 +12,22 @@ export const getTodos = async (setTodolist) => {
 export const todoCreate = async (todo) => {
   try {
     const { data } = await api.createTodo(todo);
-    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const todoDelete = async (id) => {
+  try {
+    await api.deleteTodo(id);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const todoUpdate = async (id, newTodo) => {
+  try {
+    await api.updateTodo(id, newTodo);
   } catch (error) {
     console.log(error);
   }

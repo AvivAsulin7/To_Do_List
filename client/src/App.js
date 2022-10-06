@@ -10,13 +10,15 @@ import { getTodos } from "./actions/todo";
 
 function App() {
   const [todolist, setTodolist] = useState([]);
-  const [todo, setTodo] = useState({});
+  const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {
     getTodos(setTodolist);
-  }, []);
+  }, [todolist, currentId]);
   return (
-    <ToDoContext.Provider value={{ todolist, setTodolist, todo, setTodo }}>
+    <ToDoContext.Provider
+      value={{ todolist, setTodolist, currentId, setCurrentId }}
+    >
       <Container maxWidth="lg" sx={{ padding: "120px" }}>
         <Grow in>
           <Container>
