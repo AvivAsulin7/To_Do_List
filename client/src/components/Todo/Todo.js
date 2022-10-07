@@ -5,17 +5,17 @@ import {
   faTrashCan,
   faCircleCheck,
   faPenToSquare,
+  faArrowUp,
+  faArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
-import { todoDelete } from "../../actions/todo";
-import TodoContext from "../../contexts/TodoContext";
+import { todoDelete, todoUpdate } from "../../actions/todo";
+import { IconButton } from "../StyledComponents/Styled";
 
 const Todo = ({ item }) => {
-  const { currentId, setCurrentId } = useContext(TodoContext);
-
   const [isDone, setIsDone] = useState(false);
-  const handleDelete = () => {
-    setCurrentId(item._id);
-    todoDelete(item._id);
+
+  const updatePriority = (prio) => {
+    todoUpdate(item._id, { todo: item.todo, priority: prio });
   };
 
   return (
@@ -36,15 +36,21 @@ const Todo = ({ item }) => {
         {item.todo}
       </li>
       <Box display="flex">
-        <Button onClick={() => setIsDone(!isDone)}>
-          <FontAwesomeIcon icon={faCircleCheck} />
-        </Button>
-        <Button onClick={() => setCurrentId(item._id)}>
+        <IconButton onClick={() => updatePriority("high")}>
+          <FontAwesomeIcon icon={faArrowUp} color="#3CCF4E" />
+        </IconButton>
+        <IconButton onClick={() => updatePriority("low")}>
+          <FontAwesomeIcon icon={faArrowDown} color="#F32424" />
+        </IconButton>
+        <IconButton onClick={() => setIsDone(!isDone)}>
+          <FontAwesomeIcon icon={faCircleCheck} color="#FFC23C" />
+        </IconButton>
+        {/* <IconButton onClick={() => setCurrentId(item._id)}>
           <FontAwesomeIcon icon={faPenToSquare} />
-        </Button>
-        <Button onClick={() => handleDelete()}>
+        </IconButton> */}
+        <IconButton onClick={() => todoDelete(item._id)}>
           <FontAwesomeIcon icon={faTrashCan} />
-        </Button>
+        </IconButton>
       </Box>
     </Box>
   );

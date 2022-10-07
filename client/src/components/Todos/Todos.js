@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Box, Typography, Input, Button, TextField } from "@mui/material";
+import { Box, Typography, Input } from "@mui/material";
 import { BoxList, CustomButton } from "../StyledComponents/Styled";
 import TodoContext from "../../contexts/TodoContext";
 import { todoCreate, todoUpdate } from "../../actions/todo";
@@ -7,24 +7,30 @@ import Todo from "../Todo/Todo";
 
 const Todos = () => {
   const { todolist, currentId, setCurrentId } = useContext(TodoContext);
-  const [item, setItem] = useState({ todo: "", priority: "none" });
-  const [itemUpdated, setItemUpdated] = useState({});
+  const [item, setItem] = useState({ todo: "", priority: "" });
+  const [itemUpdated, setItemUpdated] = useState({ todo: "", priority: "" });
 
   useEffect(() => {
     setItem(itemUpdated);
   }, [itemUpdated]);
 
-  const handleSumbit = () => {
-    if (currentId == null) todoCreate(item);
-    else {
+  const handleSumbit = (e) => {
+    e.preventDefault();
+    if (currentId == null) {
+      todoCreate(item);
+    } else {
       setItemUpdated(
         currentId ? todolist.map((item) => item._id === currentId) : null
       );
       todoUpdate(currentId, item);
     }
+    e.target.reset();
     setCurrentId(null);
     setItem({ todo: "", priority: "" });
+    console.log(item);
+    console.log(currentId);
   };
+
   return (
     <BoxList>
       <Typography
@@ -40,31 +46,31 @@ const Todos = () => {
       >
         To To List
       </Typography>
-      {/* <form autoComplete="off" noValidate onSubmit={handleSumbit}> */}
-      <Input
-        onChange={(e) => setItem({ todo: e.target.value, priority: "none" })}
-        disableUnderline
-        sx={{
-          boxSizing: "border-box",
-          backgroundColur: "transparent",
-          padding: "0.7rem",
-          border: "solid 1px transparent",
-          borderBottom: "dashed 3px #fdcb6e",
-          //   fontSize: "1rem",
-          fontWeight: "bold",
-          width: "70%",
-          fontFamily: "Architects Daughter",
-        }}
-      ></Input>
-      <CustomButton
-        type="sumbit"
-        onClick={() => {
-          handleSumbit();
-        }}
-      >
-        Add
-      </CustomButton>
-      {/* </form> */}
+      <form autoComplete="off" noValidate onSubmit={handleSumbit}>
+        <Input
+          onChange={(e) => setItem({ todo: e.target.value, priority: "none" })}
+          disableUnderline
+          sx={{
+            boxSizing: "border-box",
+            backgroundColur: "transparent",
+            padding: "0.7rem",
+            border: "solid 1px transparent",
+            borderBottom: "dashed 3px #fdcb6e",
+            //   fontSize: "1rem",
+            fontWeight: "bold",
+            width: "70%",
+            fontFamily: "Architects Daughter",
+          }}
+        ></Input>
+        <CustomButton
+          type="sumbit"
+          // onClick={() => {
+          //   handleSumbit();
+          // }}
+        >
+          Add
+        </CustomButton>
+      </form>
       <ul>
         {todolist.map((item, index) => {
           return <Todo item={item} key={index} />;

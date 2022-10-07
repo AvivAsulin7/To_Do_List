@@ -9,6 +9,7 @@ export const BoxList = styled(Box)({
   maxWidth: "100%",
   minWidth: "250px",
   background: "#f1f5f",
+  backgroundColor: "#fff",
   backgroundImage: "radial-gradient(#bfc0c1 7.2%, transparent 0)",
   backgroundSize: "25px 25px",
   borderRadius: "20px",
@@ -29,4 +30,11 @@ export const CustomButton = styled(Button)({
     backgroundColor: "#F57328",
     transition: "all .5s ease-in-out",
   },
+});
+
+export const IconButton = styled(Button)({
+  display: "inline-block",
+  padding: "1",
+  minHeight: "0",
+  minWidth: "0",
 });
