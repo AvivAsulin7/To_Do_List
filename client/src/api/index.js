@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/todo";
+const url = "https://to-do-list-backend-kkb8.onrender.com/todo";
 
 export const fetchTodos = () => axios.get(url);
 export const createTodo = (todo) => axios.post(url, todo);
