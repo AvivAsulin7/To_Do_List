@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Box, Typography, Input } from "@mui/material";
+import { Box, Typography, Input, CircularProgress } from "@mui/material";
 import { BoxList, CustomButton } from "../StyledComponents/Styled";
 import TodoContext from "../../contexts/TodoContext";
 import { todoCreate, todoUpdate } from "../../actions/todo";
@@ -71,11 +71,15 @@ const Todos = () => {
           Add
         </CustomButton>
       </form>
-      <ul>
-        {todolist.map((item, index) => {
-          return <Todo item={item} key={index} />;
-        })}
-      </ul>
+      {!todolist.length ? (
+        <CircularProgress sx={{ margin: "100px" }} />
+      ) : (
+        <ul>
+          {todolist.map((item, index) => {
+            return <Todo item={item} key={index} />;
+          })}
+        </ul>
+      )}
     </BoxList>
   );
 };
