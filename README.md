@@ -2,7 +2,7 @@
 
 A fullStack project. <br/>
 Todolist with some actions: Add , Delete , Mark as done , Add to specific priority  <br/>
-I used in Material UI for styles.
+I used in Material UI for styles. <br/>
 Link: https://to-do-list-frontend.onrender.com
 
 
