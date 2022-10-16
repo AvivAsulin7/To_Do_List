@@ -5,7 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import routerTodo from "./routes/todo.js";
 
-dotenv.config({ path: "ENV_FILENAME" });
+dotenv.config();
 const app = express();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));

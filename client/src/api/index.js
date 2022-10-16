@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const url = "https://to-do-list-backend-wipa.onrender.com/todo";
-// const url = "http://localhost:3000/todo";
+const url = "http://localhost:3000/todo";
 
 export const fetchTodos = () => axios.get(url);
 export const createTodo = (todo) => axios.post(url, todo);
