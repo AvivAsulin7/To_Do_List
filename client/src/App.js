@@ -51,7 +51,7 @@ function App() {
               display="flex"
               justify="space-between"
               alignItems="stretch"
-              direction={matches ? "column" : "none"}
+              flexDirection={matches ? "column" : "none"}
             >
               <Grid item xs={12} sm={7} margin="auto" marginTop="0">
                 <Todos />
