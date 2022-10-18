@@ -11,6 +11,8 @@ Link : https://to-do-list-frontend.onrender.com/
   <li>Frontend- React js</li>
   <li>Backend- Node js</li>
   <li>Database- MongoDB</li>
+  <li>Hosting- Render</li>
+
 </ul>
 
 # Screenshots
