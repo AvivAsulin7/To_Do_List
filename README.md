@@ -3,15 +3,12 @@
 A fullStack project. <br/>
 Todolist with some actions: Add , Delete , Mark as done , Add to specific priority  <br/>
 I used in Material UI for styles. <br/>
-Link: https://to-do-list-frontend.onrender.com
-
 
 # Technologies
 <ul>
   <li>Frontend- React js</li>
   <li>Backend- Node js</li>
   <li>Database- MongoDB</li>
-  <li>Hosting- Render</li>
 </ul>
 
 # Screenshots
